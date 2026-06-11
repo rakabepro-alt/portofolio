@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riezky Akbar - Portfolio</title>
+    <title>Riezky Akbar - Portfolio Pac-Man Style</title>
     <style>
         * {
             margin: 0;
@@ -12,379 +12,421 @@
         }
 
         :root {
-            --primary: #1a3a52;
-            --secondary: #0f2744;
-            --accent: #00a8ff;
-            --light: #e0f2ff;
-            --text-light: #f0f4f8;
-            --text-dark: #d0d8e0;
-            --border: #2d5a80;
-            --hover: #0088dd;
+            --primary-blue: #0066FF;
+            --light-blue: #00AAFF;
+            --dark-blue: #0044AA;
+            --black: #0d0d0d;
+            --dark-gray: #1a1a1a;
+            --light-gray: #e0e0e0;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f2744 0%, #1a3a52 100%);
-            color: var(--text-light);
+            font-family: 'Arial', 'Comic Sans MS', cursive;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+            color: var(--light-gray);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Navbar */
+        /* NAVBAR */
         nav {
-            background: rgba(15, 39, 68, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 2px solid var(--border);
-            padding: 1rem 2rem;
+            background: linear-gradient(90deg, var(--black) 0%, var(--dark-blue) 100%);
+            padding: 1.5rem 2rem;
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
+            border-bottom: 4px solid var(--light-blue);
+            box-shadow: 0 8px 20px rgba(0, 170, 255, 0.3);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         nav .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: var(--accent);
-            text-decoration: none;
+            color: var(--light-blue);
+            text-shadow: 3px 3px 0 var(--primary-blue);
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { text-shadow: 3px 3px 0 var(--primary-blue), 0 0 10px var(--light-blue); }
+            50% { text-shadow: 3px 3px 0 var(--primary-blue), 0 0 20px var(--light-blue); }
         }
 
         nav ul {
+            list-style: none;
             display: flex;
             gap: 2rem;
-            list-style: none;
         }
 
         nav a {
-            color: var(--text-light);
+            color: var(--light-gray);
             text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 0.95rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-blue);
+            z-index: -1;
+            transition: left 0.3s ease;
+            border-radius: 20px;
+        }
+
+        nav a:hover::before {
+            left: 0;
         }
 
         nav a:hover {
-            color: var(--accent);
+            color: white;
+            transform: scale(1.1);
         }
 
-        .cta-button {
-            background: var(--accent);
-            color: var(--secondary);
-            padding: 0.7rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .cta-button:hover {
-            background: var(--hover);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
+        /* HERO SECTION */
         .hero {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            padding: 5rem 2rem;
-            max-width: 1200px;
+            text-align: center;
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--dark-blue) 0%, var(--black) 100%);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 6px dashed var(--light-blue);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 170, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
             margin: 0 auto;
-            min-height: 70vh;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--light);
-            line-height: 1.2;
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--light-blue);
+            margin-bottom: 0.5rem;
+            text-shadow: 4px 4px 0 var(--primary-blue);
+            animation: bounce 2s infinite;
         }
 
-        .hero-content .subtitle {
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero p {
             font-size: 1.3rem;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-weight: 500;
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: var(--text-dark);
+            color: var(--light-gray);
             margin-bottom: 2rem;
-            line-height: 1.8;
+            font-weight: bold;
         }
 
-        .hero-buttons {
+        .hero .subtitle {
+            color: var(--light-blue);
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 0 var(--primary-blue);
+        }
+
+        .btn-group {
             display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 0.9rem 2rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
             border: none;
-            border-radius: 5px;
-            font-size: 1rem;
+            border-radius: 30px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         .btn-primary {
-            background: var(--accent);
-            color: var(--secondary);
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .btn-primary:hover {
-            background: var(--hover);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 170, 255, 0.5);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
+            color: var(--light-blue);
+            border: 3px solid var(--light-blue);
         }
 
         .btn-secondary:hover {
-            background: var(--accent);
-            color: var(--secondary);
+            background: var(--light-blue);
+            color: var(--black);
+            transform: translateY(-4px);
         }
 
-        .stats {
-            display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .stat-label {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-        }
-
-        .hero-image {
-            text-align: center;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            border: 3px solid var(--accent);
-            box-shadow: 0 20px 60px rgba(0, 168, 255, 0.2);
-        }
-
-        /* Section */
-        section {
-            padding: 5rem 2rem;
+        /* CONTAINER */
+        .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* SECTION STYLES */
+        section {
+            padding: 5rem 2rem;
+            border-bottom: 6px dashed var(--light-blue);
         }
 
         section h2 {
             font-size: 2.5rem;
-            text-align: center;
+            color: var(--light-blue);
             margin-bottom: 1rem;
-            color: var(--light);
+            text-shadow: 3px 3px 0 var(--primary-blue);
+            position: relative;
+            display: inline-block;
         }
 
-        section .subtitle {
-            text-align: center;
-            color: var(--text-dark);
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
+        section h2::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--light-blue));
+            margin-top: 1rem;
         }
 
-        /* About Section */
+        section h3 {
+            color: var(--light-gray);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        /* ABOUT SECTION */
         .about-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
         .about-card {
-            background: rgba(26, 58, 82, 0.8);
-            border: 2px solid var(--border);
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-gray));
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 30px;
+            border: 3px solid var(--light-blue);
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .about-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.15);
-            transform: translateY(-5px);
+        .about-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 170, 255, 0.1);
+            transition: left 0.3s ease;
         }
 
-        .about-card h3 {
-            color: var(--accent);
-            font-size: 1.3rem;
+        .about-card:hover::before {
+            left: 0;
+        }
+
+        .about-card h4 {
+            font-size: 1.5rem;
+            color: var(--light-blue);
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
         .about-card p {
-            color: var(--text-dark);
-            line-height: 1.8;
+            color: var(--light-gray);
+            position: relative;
+            z-index: 1;
         }
 
-        /* Skills */
+        .about-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 170, 255, 0.3);
+        }
+
+        /* SKILLS SECTION */
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1.5rem;
             margin-top: 3rem;
         }
 
-        .skill {
-            background: rgba(26, 58, 82, 0.8);
-            border: 2px solid var(--border);
-            padding: 1.5rem;
+        .skill-box {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            padding: 2rem;
+            border-radius: 20px;
             text-align: center;
-            border-radius: 8px;
+            font-weight: bold;
+            color: white;
             transition: all 0.3s ease;
+            border: 3px solid var(--light-blue);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2);
         }
 
-        .skill:hover {
-            border-color: var(--accent);
-            background: rgba(0, 168, 255, 0.1);
-            transform: scale(1.05);
+        .skill-box:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 10px 30px rgba(0, 170, 255, 0.5);
         }
 
-        .skill-name {
-            color: var(--light);
-            font-weight: 600;
-            margin-top: 1rem;
-        }
-
-        /* Projects */
+        /* PROJECTS SECTION */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
             margin-top: 3rem;
         }
 
         .project-card {
-            background: linear-gradient(135deg, rgba(26, 58, 82, 0.9), rgba(15, 39, 68, 0.9));
-            border: 2px solid var(--border);
-            border-radius: 8px;
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-gray));
+            border-radius: 25px;
             overflow: hidden;
+            border: 3px solid var(--light-blue);
             transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-color: var(--accent);
-            box-shadow: 0 15px 40px rgba(0, 168, 255, 0.2);
-            transform: translateY(-8px);
+            position: relative;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
         .project-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             padding: 1.5rem;
-            background: rgba(0, 168, 255, 0.1);
-            border-bottom: 2px solid var(--border);
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            text-align: center;
         }
 
         .project-content {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
-        .project-content h3 {
-            color: var(--light);
+        .project-content h4 {
             font-size: 1.3rem;
-            margin-bottom: 0.8rem;
+            color: var(--light-blue);
+            margin-bottom: 1rem;
         }
 
         .project-content p {
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+            color: var(--light-gray);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
         }
 
         .project-tags {
             display: flex;
-            flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
         }
 
-        .tag {
-            background: rgba(0, 168, 255, 0.2);
-            color: var(--accent);
+        .project-tag {
+            background: var(--primary-blue);
+            color: white;
             padding: 0.4rem 0.8rem;
             border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid var(--accent);
+            font-size: 0.8rem;
+            font-weight: bold;
         }
 
-        .project-link {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+        .project-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 15px 40px rgba(0, 170, 255, 0.4);
         }
 
-        .project-link:hover {
-            color: var(--hover);
+        .project-card:hover .project-icon {
+            background: linear-gradient(135deg, var(--light-blue), var(--primary-blue));
+            transform: scale(1.1);
         }
 
-        /* Contact Section */
-        .contact-wrapper {
-            background: rgba(26, 58, 82, 0.8);
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            padding: 3rem;
-            margin-top: 3rem;
-        }
-
+        /* CONTACT SECTION */
         .contact-form {
-            max-width: 600px;
-            margin: 0 auto 3rem;
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-gray));
+            padding: 3rem;
+            border-radius: 25px;
+            border: 3px solid var(--light-blue);
+            max-width: 700px;
+            margin: 3rem auto;
         }
 
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .form-group label {
             display: block;
-            color: var(--light);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: var(--light-blue);
+            font-weight: bold;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.8rem;
-            background: rgba(15, 39, 68, 0.8);
-            border: 2px solid var(--border);
-            border-radius: 5px;
-            color: var(--text-light);
-            font-family: inherit;
+            padding: 1rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 15px;
+            background: var(--black);
+            color: var(--light-gray);
+            font-family: 'Arial', sans-serif;
+            font-size: 1rem;
             transition: all 0.3s ease;
         }
 
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 10px rgba(0, 168, 255, 0.3);
+            border-color: var(--light-blue);
+            box-shadow: 0 0 20px rgba(0, 170, 255, 0.3);
+            background: linear-gradient(135deg, var(--black), var(--dark-gray));
         }
 
         .form-group textarea {
@@ -392,391 +434,342 @@
             min-height: 120px;
         }
 
-        .form-group button {
-            width: 100%;
-            background: var(--accent);
-            color: var(--secondary);
-            padding: 1rem;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, var(--dark-blue), var(--dark-gray));
+            padding: 2rem;
+            border-radius: 20px;
+            border: 3px solid var(--light-blue);
+            text-align: center;
             transition: all 0.3s ease;
         }
 
-        .form-group button:hover {
-            background: var(--hover);
-            transform: translateY(-2px);
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .info-card {
-            background: rgba(15, 39, 68, 0.8);
-            border: 2px solid var(--border);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .info-card h4 {
-            color: var(--accent);
+        .info-box h4 {
+            color: var(--light-blue);
             margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
         }
 
-        .info-card p {
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
+        .info-box p {
+            color: var(--light-gray);
         }
 
-        .info-card a {
-            color: var(--accent);
+        .info-box a {
+            color: var(--light-blue);
             text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+            font-weight: bold;
+            transition: all 0.3s ease;
         }
 
-        .info-card a:hover {
-            color: var(--hover);
+        .info-box a:hover {
+            color: white;
+            text-shadow: 0 0 10px var(--light-blue);
         }
 
-        /* Footer */
+        .info-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 170, 255, 0.3);
+        }
+
+        /* FOOTER */
         footer {
-            background: rgba(15, 39, 68, 0.95);
-            border-top: 2px solid var(--border);
-            padding: 3rem 2rem;
+            background: linear-gradient(180deg, var(--black) 0%, var(--dark-gray) 100%);
+            padding: 2rem;
             text-align: center;
-            margin-top: 5rem;
+            border-top: 4px solid var(--light-blue);
+            color: var(--light-gray);
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .social-links a {
-            color: var(--accent);
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--light-blue));
+            border-radius: 50%;
+            color: white;
             text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: bold;
         }
 
         .social-links a:hover {
-            color: var(--hover);
+            transform: scale(1.2) rotate(360deg);
         }
 
-        footer p {
-            color: var(--text-dark);
-            font-size: 0.95rem;
-        }
-
-        /* Responsive */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            nav {
+            nav ul {
                 flex-direction: column;
                 gap: 1rem;
             }
 
-            nav ul {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 3rem 1rem;
-            }
-
-            .hero-content h1 {
+            .hero h1 {
                 font-size: 2.5rem;
             }
 
-            .about-grid,
-            .skills-grid,
-            .projects-grid {
-                grid-template-columns: 1fr;
+            section h2 {
+                font-size: 2rem;
             }
 
-            .contact-info {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 3rem 1rem;
             }
 
-            .stats {
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .btn-group {
                 flex-direction: column;
-                gap: 1.5rem;
             }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* ANIMATIONS */
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(1deg); }
+            75% { transform: rotate(-1deg); }
+        }
+
+        .wobble {
+            animation: wobble 0.5s infinite;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- NAVBAR -->
     <nav>
-        <a href="#" class="logo">RIEZKY</a>
-        <ul>
-            <li><a href="#about">Tentang</a></li>
-            <li><a href="#skills">Skill</a></li>
-            <li><a href="#projects">Proyek</a></li>
-            <li><a href="#contact">Kontak</a></li>
-            <li><a href="#contact" class="cta-button">Hubungi Saya</a></li>
-        </ul>
+        <div class="container">
+            <div class="logo">🎮 RIEZKY</div>
+            <ul>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#skills">Skill</a></li>
+                <li><a href="#projects">Proyek</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Riezky Developer</h1>
-            <p class="subtitle">Creator & Problem Solver</p>
+            <h1>RIEZKY</h1>
+            <p>Developer & Problem Solver</p>
+            <div class="subtitle">✨ Creator & Problem Solver ✨</div>
             <p>Saya passionate dalam mengubah ide menjadi solusi digital yang nyata. Dengan kombinasi kreativitas dan teknis, saya siap menciptakan sesuatu yang amazing!</p>
-            
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">Lihat Karya</a>
-                <a href="https://wa.me/082387824904" class="btn btn-secondary">WhatsApp</a>
+            <div class="btn-group">
+                <a href="#projects" class="btn btn-primary">🎯 Lihat Karya</a>
+                <a href="https://wa.me/082387824904" class="btn btn-secondary">💬 WhatsApp</a>
             </div>
-
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-number">10+</div>
-                    <div class="stat-label">Proyek</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">20+</div>
-                    <div class="stat-label">Klien</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Satisfied</div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-image">
-            <img src="https://rakabepro-alt.github.io/portofolio/profile.jpg" alt="Riezky Akbar">
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- ABOUT SECTION -->
     <section id="about">
-        <h2>Tentang Saya</h2>
-        <p class="subtitle">Mari mengenal lebih dekat tentang passion saya</p>
-        <div class="about-grid">
-            <div class="about-card">
-                <h3>💻 Developer</h3>
-                <p>Saya menguasai berbagai teknologi modern dan terus belajar tools baru untuk stay updated dengan trend industry.</p>
-            </div>
-            <div class="about-card">
-                <h3>🎨 Designer</h3>
-                <p>Saya percaya desain bukan hanya tentang aesthetics, tapi juga user experience dan functionality yang optimal.</p>
-            </div>
-            <div class="about-card">
-                <h3>🚀 Problem Solver</h3>
-                <p>Setiap challenge adalah kesempatan untuk belajar. Saya suka breakdown masalah kompleks menjadi solusi sederhana.</p>
-            </div>
-            <div class="about-card">
-                <h3>🎯 Visioner</h3>
-                <p>Saya tidak hanya membuat kode, tapi menciptakan dampak nyata yang membantu bisnis dan user mencapai tujuan mereka.</p>
+        <div class="container">
+            <h2>Tentang Saya</h2>
+            <h3>Mari mengenal lebih dekat tentang passion saya</h3>
+            
+            <div class="about-grid">
+                <div class="about-card">
+                    <h4>💻 Developer</h4>
+                    <p>Saya menguasai berbagai teknologi modern dan terus belajar tools baru untuk stay updated dengan trend industry.</p>
+                </div>
+                <div class="about-card">
+                    <h4>🎨 Designer</h4>
+                    <p>Saya percaya desain bukan hanya tentang aesthetics, tapi juga user experience dan functionality yang optimal.</p>
+                </div>
+                <div class="about-card">
+                    <h4>🔧 Problem Solver</h4>
+                    <p>Setiap challenge adalah kesempatan untuk belajar. Saya suka breakdown masalah kompleks menjadi solusi sederhana.</p>
+                </div>
+                <div class="about-card">
+                    <h4>🚀 Visioner</h4>
+                    <p>Saya tidak hanya membuat kode, tapi menciptakan dampak nyata yang membantu bisnis dan user mencapai tujuan mereka.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
+    <!-- SKILLS SECTION -->
     <section id="skills">
-        <h2>Teknologi & Tools</h2>
-        <p class="subtitle">Keahlian yang saya kuasai</p>
-        <div class="skills-grid">
-            <div class="skill">
-                <div style="font-size: 2rem;">📄</div>
-                <div class="skill-name">HTML5</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">🎨</div>
-                <div class="skill-name">CSS3</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">⚡</div>
-                <div class="skill-name">JavaScript</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">⚛️</div>
-                <div class="skill-name">React</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">🐘</div>
-                <div class="skill-name">PHP</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">🔴</div>
-                <div class="skill-name">Laravel</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">🗄️</div>
-                <div class="skill-name">MySQL</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">📦</div>
-                <div class="skill-name">Git</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">🎭</div>
-                <div class="skill-name">Figma</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">🟢</div>
-                <div class="skill-name">Node.js</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">⚙️</div>
-                <div class="skill-name">Backend</div>
-            </div>
-            <div class="skill">
-                <div style="font-size: 2rem;">📱</div>
-                <div class="skill-name">Responsive</div>
+        <div class="container">
+            <h2>Teknologi & Tools</h2>
+            <h3>Keahlian yang saya kuasai</h3>
+            
+            <div class="skills-grid">
+                <div class="skill-box">📄 HTML5</div>
+                <div class="skill-box">🎨 CSS3</div>
+                <div class="skill-box">⚡ JavaScript</div>
+                <div class="skill-box">⚛️ React</div>
+                <div class="skill-box">🐘 PHP</div>
+                <div class="skill-box">🎯 Laravel</div>
+                <div class="skill-box">🗄️ MySQL</div>
+                <div class="skill-box">📦 Git</div>
+                <div class="skill-box">🎭 Figma</div>
+                <div class="skill-box">🟢 Node.js</div>
+                <div class="skill-box">🔗 Backend</div>
+                <div class="skill-box">📱 Responsive</div>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
+    <!-- PROJECTS SECTION -->
     <section id="projects">
-        <h2>Proyek Terbaik</h2>
-        <p class="subtitle">Karya-karya yang saya bangga</p>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-icon">🛍️</div>
-                <div class="project-content">
-                    <h3>E-Commerce Platform</h3>
-                    <p>Platform belanja online lengkap dengan cart, checkout, dan payment gateway integration untuk pengalaman belanja yang seamless.</p>
-                    <div class="project-tags">
-                        <span class="tag">React</span>
-                        <span class="tag">PHP</span>
-                        <span class="tag">MySQL</span>
+        <div class="container">
+            <h2>Proyek Terbaik</h2>
+            <h3>Karya-karya yang saya bangga</h3>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">🛍️</div>
+                    <div class="project-content">
+                        <h4>E-Commerce Platform</h4>
+                        <p>Platform belanja online lengkap dengan cart, checkout, dan payment gateway integration untuk pengalaman belanja yang seamless.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">MySQL</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Lihat Project</a>
                     </div>
-                    <a href="#" class="project-link">Lihat Project →</a>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-icon">📊</div>
-                <div class="project-content">
-                    <h3>Analytics Dashboard</h3>
-                    <p>Dashboard real-time untuk monitoring data dengan charts interaktif, filters, dan export functionality untuk analisis mendalam.</p>
-                    <div class="project-tags">
-                        <span class="tag">JavaScript</span>
-                        <span class="tag">Chart.js</span>
-                        <span class="tag">API</span>
+                <div class="project-card">
+                    <div class="project-icon">📊</div>
+                    <div class="project-content">
+                        <h4>Analytics Dashboard</h4>
+                        <p>Dashboard real-time untuk monitoring data dengan charts interaktif, filters, dan export functionality untuk analisis mendalam.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">JavaScript</span>
+                            <span class="project-tag">Chart.js</span>
+                            <span class="project-tag">API</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Lihat Project</a>
                     </div>
-                    <a href="#" class="project-link">Lihat Project →</a>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-icon">🎨</div>
-                <div class="project-content">
-                    <h3>Portfolio Website</h3>
-                    <p>Website portofolio modern dengan design minimal, smooth animations, dan optimized performance untuk showcase karya profesional.</p>
-                    <div class="project-tags">
-                        <span class="tag">HTML/CSS</span>
-                        <span class="tag">Design</span>
-                        <span class="tag">SEO</span>
+                <div class="project-card">
+                    <div class="project-icon">🎨</div>
+                    <div class="project-content">
+                        <h4>Portfolio Website</h4>
+                        <p>Website portofolio modern dengan design minimal, smooth animations, dan optimized performance untuk showcase karya profesional.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML/CSS</span>
+                            <span class="project-tag">Design</span>
+                            <span class="project-tag">SEO</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Lihat Project</a>
                     </div>
-                    <a href="#" class="project-link">Lihat Project →</a>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-icon">📱</div>
-                <div class="project-content">
-                    <h3>Mobile App UI</h3>
-                    <p>Design komprehensif untuk aplikasi mobile dengan user flows, wireframes, dan high-fidelity prototypes siap untuk development.</p>
-                    <div class="project-tags">
-                        <span class="tag">Figma</span>
-                        <span class="tag">UI/UX</span>
-                        <span class="tag">Design</span>
+                <div class="project-card">
+                    <div class="project-icon">📱</div>
+                    <div class="project-content">
+                        <h4>Mobile App UI</h4>
+                        <p>Design komprehensif untuk aplikasi mobile dengan user flows, wireframes, dan high-fidelity prototypes siap untuk development.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Figma</span>
+                            <span class="project-tag">UI/UX</span>
+                            <span class="project-tag">Design</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Lihat Project</a>
                     </div>
-                    <a href="#" class="project-link">Lihat Project →</a>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-icon">🔐</div>
-                <div class="project-content">
-                    <h3>Authentication System</h3>
-                    <p>Sistem keamanan lengkap dengan encrypted passwords, session management, 2FA, dan compliance dengan security best practices.</p>
-                    <div class="project-tags">
-                        <span class="tag">PHP</span>
-                        <span class="tag">Security</span>
-                        <span class="tag">Encryption</span>
+                <div class="project-card">
+                    <div class="project-icon">🔐</div>
+                    <div class="project-content">
+                        <h4>Authentication System</h4>
+                        <p>Sistem keamanan lengkap dengan encrypted passwords, session management, 2FA, dan compliance dengan security best practices.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">Security</span>
+                            <span class="project-tag">Encryption</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Lihat Project</a>
                     </div>
-                    <a href="#" class="project-link">Lihat Project →</a>
                 </div>
-            </div>
 
-            <div class="project-card">
-                <div class="project-icon">⚡</div>
-                <div class="project-content">
-                    <h3>REST API Development</h3>
-                    <p>RESTful API yang robust dan scalable dengan documentation lengkap, error handling, rate limiting, dan testing yang comprehensive.</p>
-                    <div class="project-tags">
-                        <span class="tag">Laravel</span>
-                        <span class="tag">REST</span>
-                        <span class="tag">Testing</span>
+                <div class="project-card">
+                    <div class="project-icon">⚡</div>
+                    <div class="project-content">
+                        <h4>REST API Development</h4>
+                        <p>RESTful API yang robust dan scalable dengan documentation lengkap, error handling, rate limiting, dan testing yang comprehensive.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Laravel</span>
+                            <span class="project-tag">REST</span>
+                            <span class="project-tag">Testing</span>
+                        </div>
+                        <a href="#" class="btn btn-primary" style="display: inline-block; margin-top: 1rem; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Lihat Project</a>
                     </div>
-                    <a href="#" class="project-link">Lihat Project →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- CONTACT SECTION -->
     <section id="contact">
-        <h2>Mari Kolaborasi</h2>
-        <p class="subtitle">Ada project menarik atau ingin diskusi? Hubungi saya!</p>
-        
-        <div class="contact-wrapper">
+        <div class="container">
+            <h2>Mari Kolaborasi</h2>
+            <h3>Ada project menarik atau ingin diskusi? Hubungi saya!</h3>
+            
             <form class="contact-form">
                 <div class="form-group">
                     <label for="name">Nama Lengkap</label>
-                    <input type="text" id="name" required>
+                    <input type="text" id="name" placeholder="Masukkan nama Anda" required>
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" required>
+                    <input type="email" id="email" placeholder="email@example.com" required>
                 </div>
                 <div class="form-group">
                     <label for="subject">Subjek</label>
-                    <input type="text" id="subject" required>
+                    <input type="text" id="subject" placeholder="Topik pesan Anda" required>
                 </div>
                 <div class="form-group">
                     <label for="message">Pesan</label>
-                    <textarea id="message" required></textarea>
+                    <textarea id="message" placeholder="Tuliskan pesan Anda di sini..." required></textarea>
                 </div>
-                <div class="form-group">
-                    <button type="submit">Kirim Pesan</button>
-                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">✉️ Kirim Pesan</button>
             </form>
 
             <div class="contact-info">
-                <div class="info-card">
-                    <h4>💬 WhatsApp</h4>
+                <div class="info-box">
+                    <h4>📱 WhatsApp</h4>
                     <p>Hubungi saya langsung untuk respon lebih cepat</p>
                     <a href="https://wa.me/082387824904">+62 823 8782 4904</a>
                 </div>
-                <div class="info-card">
+                <div class="info-box">
                     <h4>✈️ Telegram</h4>
                     <p>Atau gunakan Telegram untuk diskusi santai</p>
                     <a href="https://t.me/082387824904">Open Telegram</a>
                 </div>
-                <div class="info-card">
+                <div class="info-box">
                     <h4>📧 Email</h4>
                     <p>Untuk komunikasi formal atau detailed inquiry</p>
                     <a href="mailto:riezkyakbar@email.com">riezkyakbar@email.com</a>
                 </div>
-                <div class="info-card">
+                <div class="info-box">
                     <h4>📍 Lokasi</h4>
                     <p>Batam, Kepulauan Riau</p>
                     <p>Indonesia 🇮🇩</p>
@@ -785,19 +778,22 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- FOOTER -->
     <footer>
-        <div class="social-links">
-            <a href="https://github.com" target="_blank" title="GitHub">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" title="LinkedIn">LinkedIn</a>
-            <a href="https://instagram.com" target="_blank" title="Instagram">Instagram</a>
-            <a href="https://wa.me/082387824904" target="_blank" title="WhatsApp">WhatsApp</a>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com">GH</a>
+                <a href="https://linkedin.com">LI</a>
+                <a href="https://instagram.com">IG</a>
+                <a href="https://wa.me/082387824904">WA</a>
+            </div>
+            <p>© 2024 Riezky Akbar. All Rights Reserved.</p>
+            <p>🎮 Pac-Man Style Portfolio 🎮</p>
         </div>
-        <p>© 2024 Riezky Akbar. All Rights Reserved.</p>
     </footer>
 
     <script>
-        // Smooth scrolling
+        // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -811,8 +807,29 @@
         // Form submission
         document.querySelector('.contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Terima kasih! Pesan Anda akan segera kami proses.');
+            alert('Terima kasih! Pesan Anda telah diterima. Saya akan segera menghubungi Anda! 🎉');
             this.reset();
+        });
+
+        // Add wobble animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.about-card, .project-card, .skill-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
         });
     </script>
 </body>
